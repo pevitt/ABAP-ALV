@@ -1,0 +1,110 @@
+* Armamos la estructura del catalogo
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'MATNR'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Material'.
+  wa_catalog-seltext_m = 'Material'.
+  wa_catalog-seltext_l = 'Material'.
+*  wa_catalog-outputlen = 10.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+wa_catalog-fieldname = 'MAKTX'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Descripcion'.
+  wa_catalog-seltext_m = 'Descripcion'.
+  wa_catalog-seltext_l = 'Descripcion'.
+  wa_catalog-outputlen = 30.
+*  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'BWKEY'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Centro'.
+  wa_catalog-seltext_m = 'Centro'.
+  wa_catalog-seltext_l = 'Centro'.
+  wa_catalog-outputlen = 7.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'MTART'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'T. Mat'.
+  wa_catalog-seltext_m = 'T. Mat'.
+  wa_catalog-seltext_l = 'T. Mat'.
+  wa_catalog-outputlen = 6.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'MATKL'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Grp. Arti'.
+  wa_catalog-seltext_m = 'Grp. Arti'.
+  wa_catalog-seltext_l = 'Grp. Arti'.
+*  wa_catalog-outputlen = 15.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'SALK3'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Monto'.
+  wa_catalog-seltext_m = 'Monto'.
+  wa_catalog-seltext_l = 'Monto'.
+*  wa_catalog-hotspot = 'X'.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'LBKUM'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Existencia'.
+  wa_catalog-seltext_m = 'Existencia'.
+  wa_catalog-seltext_l = 'Existencia'.
+  wa_catalog-hotspot = 'X'.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'VERPR'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Costo MM60'.
+  wa_catalog-seltext_m = 'Costo MM60'.
+  wa_catalog-seltext_l = 'Costo MM60'.
+*  wa_catalog-hotspot = 'X'.
+  wa_catalog-just      = 'C'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'BUDAT'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Ult. Consumo'.
+  wa_catalog-seltext_m = 'Ult. Consumo'.
+  wa_catalog-seltext_l = 'Ult. Consumo'.
+  wa_catalog-outputlen = 12.
+  wa_catalog-just      = 'C'.
+*  wa_catalog-hotspot = 'X'.
+APPEND wa_catalog TO it_catalog.
+CLEAR wa_catalog.
+  wa_catalog-fieldname = 'DIAS'.
+  wa_catalog-tabname = 'it_pro'.
+  wa_catalog-seltext_s = 'Dias'.
+  wa_catalog-seltext_m = 'Dias'.
+  wa_catalog-seltext_l = 'Dias'.
+*  wa_catalog-outputlen = 15.
+  wa_catalog-just      = 'C'.
+  wa_catalog-hotspot = 'X'.
+APPEND wa_catalog TO it_catalog.
+
+
+CLEAR st_layout.
+st_layout-ZEBRA = 'X'.
+st_layout-WINDOW_TITLEBAR = 'Reporte Productos Sin Movimiento'.
+
+V_REPID = sy-repid.
+
+CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+  EXPORTING
+    i_callback_program = v_repid
+    i_callback_user_command = 'USER_COMMAND'
+    it_fieldcat        = it_catalog
+    is_layout          = st_layout
+  TABLES
+    t_outtab           = it_pro.
+
